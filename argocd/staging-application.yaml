@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: aspcore-hello-api-kustomize-staging
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    # Private repo -> add repo credentials in ArgoCD, or make it public.
+    # Local-only alternative: http://gitea.gitea.svc.cluster.local:3000/gitea_admin/aspcore-hello-api-gitops-kustomize.git
+    repoURL: https://github.com/mrevak/aspcore-hello-api-gitops-kustomize.git
+    targetRevision: main
+    # ArgoCD auto-detects kustomize (kustomization.yaml present).
+    path: environments/staging
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kust-staging
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

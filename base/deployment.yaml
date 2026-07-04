@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aspcore-hello-api
+  labels:
+    app: aspcore-hello-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: aspcore-hello-api
+  template:
+    metadata:
+      labels:
+        app: aspcore-hello-api
+    spec:
+      containers:
+        - name: aspcore-hello-api
+          # Image NAME is matched by the kustomize `images:` transformer in each
+          # overlay, which sets `newTag`. cocicd rewrites that newTag on deploy.
+          image: localhost:5000/aspcore-hello-api:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 15

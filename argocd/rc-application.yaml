@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: aspcore-hello-api-kustomize-rc
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/mrevak/aspcore-hello-api-gitops-kustomize.git
+    targetRevision: main
+    path: environments/rc
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kust-rc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
