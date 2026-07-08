@@ -3,5 +3,5 @@ kind: Kustomization
 resources:
   - ../../base
 images:
-  - name: localhost:5000/aspcore-hello-api
+  - name: localhost:5000/library/aspcore-hello-api
     newTag: latest

@@ -20,7 +20,7 @@ argocd/
 ```
 
 cocicd deploy config (in the projsettings-kustomize repo):
-`engine: kustomize`, `updates: [{ name: localhost:5000/aspcore-hello-api, new_tag: ... }]`.
+`engine: kustomize`, `updates: [{ name: localhost:5000/library/aspcore-hello-api, new_tag: ... }]`.
 The updater matches `images[].name` and sets `newTag`; it also injects
 `cocicd.io/*` keys under `commonAnnotations`.
 

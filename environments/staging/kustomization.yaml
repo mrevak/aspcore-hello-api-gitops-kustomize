@@ -3,8 +3,8 @@ kind: Kustomization
 resources:
   - ../../base
 # cocicd rewrites `newTag` here on deploy / promotion
-# (workflow update: { name: localhost:5000/aspcore-hello-api, new_tag: ... }).
+# (workflow update: { name: localhost:5000/library/aspcore-hello-api, new_tag: ... }).
 # It also injects cocicd.io/* keys under commonAnnotations.
 images:
-  - name: localhost:5000/aspcore-hello-api
+  - name: localhost:5000/library/aspcore-hello-api
     newTag: latest

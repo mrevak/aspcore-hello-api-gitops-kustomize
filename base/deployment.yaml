@@ -18,7 +18,7 @@ spec:
         - name: aspcore-hello-api
           # Image NAME is matched by the kustomize `images:` transformer in each
           # overlay, which sets `newTag`. cocicd rewrites that newTag on deploy.
-          image: localhost:5000/aspcore-hello-api:latest
+          image: localhost:5000/library/aspcore-hello-api:latest
           ports:
             - containerPort: 8080
           readinessProbe:
